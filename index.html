@@ -13,12 +13,12 @@
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <a class="nav-link" id="companiesLink" href="#companies">
-            Companies
+            Companies (36)
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="productsLink" href="#products">
-            Products
+            Products (6)
           </a>
         </li>
       </ul>
@@ -28,7 +28,7 @@
 
     <script>
       const divResults = document.querySelector("#results");
-
+			const h2 = document.querySelector('#title');
       const loadData = async () => {
         const response = await Promise.all([
           fetch(`https://acme-users-api-rev.herokuapp.com/api/companies`),
@@ -79,11 +79,23 @@
 							</tr>`;
           })
           .join("");
+				window.addEventListener('hashchange', function(){
+								if(location.hash === '#companies'){
+									divResults.innerHTML = heading + companyInfo;
+									h2.innerHTML = 'Companies';
+									console.log(location);
+								}
+								if(location.hash === '#products'){
+									divResults.innerHTML = productHeading + productInfo;
+									h2.innerHTML = 'Products';
+								}
+							});
 
-        divResults.innerHTML = heading + companyInfo + productHeading + productInfo;
       };
 
       loadData();
+
+
     </script>
   </body>
 </html>
